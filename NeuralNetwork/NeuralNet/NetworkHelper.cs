@@ -6,7 +6,7 @@ namespace NeuralNet
 {
     public static class NetworkHelper
     {
-        public static void ToTreeView(TreeView t, NeuralNetwork nn)
+        public static void ToTreeView(TreeView t, NeuralNetwork.NeuralNet.NeuralNetwork nn)
         {
             t.Nodes.Clear();
 
@@ -41,7 +41,7 @@ namespace NeuralNet
             t.Nodes.Add(root);
         }
 
-        public static void ToPictureBox(PictureBox p, NeuralNetwork nn, int X, int Y)
+        public static void ToPictureBox(PictureBox p, NeuralNetwork.NeuralNet.NeuralNetwork nn, int X, int Y)
         {
             int neuronWidth    = 30;
             int neuronDistance = 50;
