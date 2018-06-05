@@ -43,23 +43,23 @@
             this.trainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageNetwork = new System.Windows.Forms.TabPage();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.propertyGridTrain = new System.Windows.Forms.PropertyGrid();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabControlParameters = new System.Windows.Forms.TabControl();
             this.tabPageTrain = new System.Windows.Forms.TabPage();
+            this.propertyGridTrain = new System.Windows.Forms.PropertyGrid();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.propertyGridNN = new System.Windows.Forms.PropertyGrid();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             openImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageNetwork.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tabControlParameters.SuspendLayout();
             this.tabPageTrain.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -173,9 +173,9 @@
             // 
             // tabPageNetwork
             // 
+            this.tabPageNetwork.Controls.Add(this.pictureBox);
             this.tabPageNetwork.Controls.Add(this.splitter1);
             this.tabPageNetwork.Controls.Add(this.tabControlParameters);
-            this.tabPageNetwork.Controls.Add(this.pictureBox);
             this.tabPageNetwork.Location = new System.Drawing.Point(4, 22);
             this.tabPageNetwork.Name = "tabPageNetwork";
             this.tabPageNetwork.Padding = new System.Windows.Forms.Padding(3);
@@ -184,37 +184,13 @@
             this.tabPageNetwork.Text = "NeuronNet";
             this.tabPageNetwork.UseVisualStyleBackColor = true;
             // 
-            // pictureBox
+            // splitter1
             // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(881, 485);
-            this.pictureBox.TabIndex = 5;
-            this.pictureBox.TabStop = false;
-            // 
-            // propertyGridTrain
-            // 
-            this.propertyGridTrain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGridTrain.Location = new System.Drawing.Point(3, 3);
-            this.propertyGridTrain.Name = "propertyGridTrain";
-            this.propertyGridTrain.Size = new System.Drawing.Size(300, 453);
-            this.propertyGridTrain.TabIndex = 7;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.DefaultExt = "xml";
-            this.openFileDialog.Filter = "Parameters files (*.xml)|*.xml|All files (*.*)|*.*\"";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "xml";
-            this.saveFileDialog.Filter = "Parameters files (*.xml)|*.xml|All files (*.*)|*.*\"";
-            // 
-            // openImageDialog
-            // 
-            openImageDialog.DefaultExt = "xml";
-            openImageDialog.Filter = "Ico (*.ico)|*.ico|All files (*.*)|*.*\"";
+            this.splitter1.Location = new System.Drawing.Point(317, 3);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 485);
+            this.splitter1.TabIndex = 9;
+            this.splitter1.TabStop = false;
             // 
             // tabControlParameters
             // 
@@ -238,6 +214,14 @@
             this.tabPageTrain.Text = "Train";
             this.tabPageTrain.UseVisualStyleBackColor = true;
             // 
+            // propertyGridTrain
+            // 
+            this.propertyGridTrain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridTrain.Location = new System.Drawing.Point(3, 3);
+            this.propertyGridTrain.Name = "propertyGridTrain";
+            this.propertyGridTrain.Size = new System.Drawing.Size(300, 453);
+            this.propertyGridTrain.TabIndex = 7;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.propertyGridNN);
@@ -249,14 +233,6 @@
             this.tabPage2.Text = "NN";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(317, 3);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 485);
-            this.splitter1.TabIndex = 9;
-            this.splitter1.TabStop = false;
-            // 
             // propertyGridNN
             // 
             this.propertyGridNN.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -264,6 +240,31 @@
             this.propertyGridNN.Name = "propertyGridNN";
             this.propertyGridNN.Size = new System.Drawing.Size(300, 453);
             this.propertyGridNN.TabIndex = 8;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(320, 3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(564, 485);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox.TabIndex = 5;
+            this.pictureBox.TabStop = false;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "xml";
+            this.openFileDialog.Filter = "Parameters files (*.xml)|*.xml|All files (*.*)|*.*\"";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "xml";
+            this.saveFileDialog.Filter = "Parameters files (*.xml)|*.xml|All files (*.*)|*.*\"";
+            // 
+            // openImageDialog
+            // 
+            openImageDialog.DefaultExt = "xml";
+            openImageDialog.Filter = "Ico (*.ico)|*.ico|All files (*.*)|*.*\"";
             // 
             // Form1
             // 
@@ -280,10 +281,11 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPageNetwork.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.tabPageNetwork.PerformLayout();
             this.tabControlParameters.ResumeLayout(false);
             this.tabPageTrain.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,7 +316,6 @@
         private System.Windows.Forms.TabPage tabPageTrain;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.PropertyGrid propertyGridNN;
-        System.Windows.Forms.OpenFileDialog openImageDialog;
     }
 }
 

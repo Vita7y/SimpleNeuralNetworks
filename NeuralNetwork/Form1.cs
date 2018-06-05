@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
-using NeuralNet;
 using NeuralNetwork.NeuralNet;
 using NeuralNetwork.Utils;
 
@@ -10,8 +11,11 @@ namespace NeuralNetwork
 {
     public partial class Form1 : Form
     {
-        NeuralNetwork.NeuralNet.NeuralNetwork _neuralNetwork;
+        NeuralNet.NeuralNetwork _neuralNetwork;
         private nnParameters _param;
+        OpenFileDialog openImageDialog;
+        private BackgroundWorker _trainWorker;
+
 
         public Form1()
         {
@@ -32,31 +36,48 @@ namespace NeuralNetwork
             _neuralNetwork = new NeuralNet.NeuralNetwork(_param.LearningRate, _param.Layers);
             propertyGridNN.SelectedObject = _neuralNetwork;
 
+            _trainWorker = new BackgroundWorker();
+            _trainWorker.DoWork += TrainWorkerOnDoWork;
+            _trainWorker.ProgressChanged+= TrainWorkerOnProgressChanged;
+            _trainWorker.RunWorkerCompleted+= TrainWorkerOnRunWorkerCompleted;
+        }
+
+        private void TrainWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+        {
+            
+
+        }
+
+        private void TrainWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        {
+            
+
+        }
+
+        private void TrainWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            _neuralNetwork = new NeuralNet.NeuralNetwork(_param.LearningRate, _param.Layers);
+            for (int i = 0; i < _param.TrainCycles; i++)
+            {
+                NeuralNet.NeuralNetwork.Train(_neuralNetwork, _param.TrainInput, _param.TrainOutput);
+                _trainWorker.ReportProgress();
+            }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //NetworkHelper.ToTreeView(treeView1, _neuralNetwork);
-            //NetworkHelper.ToPictureBox(pictureBox, _neuralNetwork, 400, 100);
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
             _neuralNetwork.Run(_param.InitValues.ToArray());
-
-            //NetworkHelper.ToTreeView(treeView1, _neuralNetwork);
-            //NetworkHelper.ToPictureBox(pictureBox, _neuralNetwork, 400, 100);
         }
 
         private void buttonTrain_Click(object sender, EventArgs e)
         {
-            _neuralNetwork = new NeuralNetwork.NeuralNet.NeuralNetwork(_param.LearningRate, _param.Layers);
-            for (int i = 0; i < _param.TrainCycles; i++)
-                NeuralNetwork.NeuralNet.NeuralNetwork.Train(_neuralNetwork, _param.TrainInput, _param.TrainOutput);
 
             propertyGridNN.SelectedObject = _neuralNetwork;
-            //NetworkHelper.ToTreeView(treeView1, _neuralNetwork);
-            //NetworkHelper.ToPictureBox(pictureBox, _neuralNetwork, 400, 100);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,23 +131,24 @@ namespace NeuralNetwork
                         var image = decoder.Frames[0];
                         pictureBox.Load(openImageDialog.FileName);
 
-                        int width = image.PixelWidth;
-                        int pixelCount = width * width;
-                        double[] pixelData = new double[pixelCount];
+                        var width = image.PixelWidth;
+                        var pixelCount = width * width;
+                        var pixelData = new double[pixelCount];
                         image.CopyPixels(pixelData, width * 4, 0);
-                        for(var i=0; i<pixelData.Length; i++)
+                        for (var i = 0; i < pixelData.Length; i++)
                             pixelData[i] = pixelData[i] != 0 ? 1 : 0;
                         _param.Layers.Clear();
-                        _param.Layers.AddRange(new []{pixelData.Length, pixelData.Length, 1});
+                        _param.Layers.AddRange(new[] {pixelData.Length, pixelData.Length, 1});
                         _param.InitValues.Clear();
+                        _param.InitValues.AddRange(pixelData.ToList());
                         _param.TrainInput = pixelData;
+                        _param.TrainOutput = new[] {0.0};
                         propertyGridTrain.Refresh();
-
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
